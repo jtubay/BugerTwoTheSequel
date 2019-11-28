@@ -1,56 +1,80 @@
-<h1>Quotes App</h1>
+<div class="container">
 
-<p>Manage quotes with this app</p>
+    <div class="jumbotron">
+        <h1>Order Your Burger </h1>
+        <p>Burger Orders for Pickup.</p>
+        <br>
+        <h2>Select a Burger or Sandwich</h2>
+        <panel>
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="newburger">Order Fresh Burger</label>
+                    {{!-- <input type="text" id="newburger" name="burger"> --}}
+                    <select data-placeholder="" id="newburger" name="burger">
+                        <option value="Nothing Selected" selected>Please Select a Sandwich</option>
+                        <option value="Hamburger">Hamburger</option>
+                        <option value="CheeseBurger">CheeseBurger</option>
+                        <option value="DoubleBfChz">Double Up (double meat and cheese)</option>
+                        <option value="VeggieBurger">Veggie Burger</option>
+                        <option value="PulledPork">Pulled Pork Sandwich</option>
+                        <option value="ChichenClub">Chicken Club Sandwich</option>
+                        <option value="SteaknChz">Steak and Cheese Sandwich</option>
+                    </select>
 
-<!-- Pass in data from server.js -->
-<ul>
-  {{#each quotes}}
-  	<li>
-  		<p><span class="label">ID:</span> {{this.id}}</p>
-      <p><span class="label">Quote:</span> {{this.quote}}</p>
-      <p><span class="label">Author:</span> {{this.author}}</p>
+                    <button type="submit" class="btn btn-success" id="addburger">
+                        <span class="fa fa-thumbs-up"></span>
+                    </button>
+                </div>
+            </form>
+        </panel>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="leftside"><strong>Order Your Burger</strong>
+                    <p>Send order to cashier when ready for pick up</p>
+                </div>
+                <div class="panel-body">
 
-      <button data-id="{{this.id}}" class="delquote">Delete</button>
+                    <ul>
+                        {{#each burgers}}
+                        {{#unless devoured}}
 
-      <a href="/{{this.id}}">Update this quote</a>
-  	</li>
-  {{/each}}
-</ul>
+                        <span><strong> {{id}} - {{burger_name}}</strong></span>
+                        <button type="button" class="eatburger btn btn-warning" id="eatbutton" data-id="{{id}}"
+                            data-newDevoured="{{devour}}"><span class="fa fa-usd"></span></button>
+                        <hr>
+                        {{/unless}}
+                        {{/each}}
+                    </ul>
 
-<h2>Add a Quote</h2>
-
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="auth">Author:</label>
-    <input type="text" id="auth" name="author">
-  </div>
-
-  <div class="form-group">
-    <label for="quo">Quote:</label>
-    <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
-  </div>
-
-  <button type="submit">Submit</button>
-</form>
-
-
-<h1>Update the quote with an id of {{this.id}}</h1>
-
-<form data-id="{{this.id}}" class="update-form">
-
-  <div class="form-group">
-    <label for="auth">Author:</label>
-    <input type="text" id="auth" name="author" value="{{this.author}}">
-  </div>
-
-  <div class="form-group">
-    <label for="quo">Quote:</label>
-    <textarea id="quo" name="quote" rows="8" cols="40">{{this.quote}}</textarea>
-  </div>
-
-  <button type="submit">Update Quote</button>
-</form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="rightside"><strong>Burger is Ready for Pick Up</strong>
+                    <p>Remove order from pick up when delivered</p>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {{#each burgers}}
+                        {{#if devoured}}
+                        <span><strong> {{id}} - {{burger_name}}</strong></span>
+                        <button type="button" class="trashburger btn btn-danger" id="trashbutton" data-id="{{id}}"
+                            data-newDevoured="{{devoured}}"><span class="fa fa-trash"></span></button>
+                        <hr>
+                        {{/if}}
+                        {{/each}}
+                    </ul>
 
 
 
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--endrow -->
+</div>
+<!--endcontainer -->
