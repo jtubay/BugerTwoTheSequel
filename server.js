@@ -5,6 +5,18 @@ const mysql = require("mysql");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+
+}else {
+  connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "rootroot",
+    database: "burgers_db"
+  })
+}
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
