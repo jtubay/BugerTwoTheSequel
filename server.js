@@ -5,17 +5,7 @@ const mysql = require("mysql");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
 
-}else {
-  connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "rootroot",
-    database: "burgers_db"
-  })
-}
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -26,13 +16,20 @@ app.use(express.static("public"))
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-const connection = mysql.createConnection({
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+
+}else {
+  connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
     password: "rootroot",
     database: "burgers_db"
 });
+}
+
+
 
 connection.connect(function(err) {
     if (err) {
@@ -59,7 +56,7 @@ app.post("/api/burgers", function(req, res) {
     
   });
   
-  // Delete a quote based off of the ID in the route URL.
+
   app.delete("/api/burgers/:id", function(req, res) {
     const id = req.params.id
     connection.query("DELETE FROM burgers WHERE ?", { id: id }, (err, results) => {
