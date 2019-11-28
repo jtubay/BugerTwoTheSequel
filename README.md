@@ -10,3 +10,5 @@ https://github.com/jtubay/BugerTwoTheSequel.git
 
 
 ## Screenshot: 
+
+![Screen Shot 2019-11-28 at 12 18 19 PM](https://user-images.githubusercontent.com/54481806/69824552-15880580-11da-11ea-8fbb-9ebe0cae074e.png)
